@@ -2,7 +2,7 @@ package de.dmeiners.mapping.impl.jexl;
 
 import org.apache.commons.jexl3.introspection.JexlSandbox;
 
-public class JexlSandboxFactory {
+class JexlSandboxFactory {
 
     private static final String FOR_NAME_METHOD_NAME = "forName";
     private static final String EXIT_METHOD_NAME = "exit";
@@ -10,7 +10,7 @@ public class JexlSandboxFactory {
     private JexlSandboxFactory() {
     }
 
-    public static JexlSandbox create() {
+    static JexlSandbox create() {
 
         JexlSandbox sandbox = new JexlSandbox();
         sandbox.black(System.class.getName()).execute(EXIT_METHOD_NAME);
