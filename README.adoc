@@ -1,0 +1,63 @@
+= A Zero-Dependency Mapping Library - Apache Commons JEXL Implementation
+:toc: macro
+
+[.float-group]
+--
+[.left]
+image::https://travis-ci.com/dmeiners88/mapping-impl-jexl.svg?branch=develop["Build Status", link="https://travis-ci.com/dmeiners88/mapping-api"]
+
+[.left]
+
+
+[.left]
+image::https://api.bintray.com/packages/dmeiners/mapping/mapping-impl-jexl/images/download.svg?version=1.0.1[link="https://bintray.com/dmeiners/mapping/mapping-impl-jexl/1.0.1/link"]
+--
+
+This is the Apache Commons JEXL Implementation module for the Zero-Dependency Mapping Libarary.
+
+toc::[]
+
+== Features
+* Implements the https://github.com/dmeiners88/mapping-api[Mapping API] by delegating to https://commons.apache.org/proper/commons-jexl/[Apache Commons JEXL]
+* Zero dependencies, Apache Commons JEXL shaded for your convenience
+* Sandboxed script execution environment
+
+== Installation
+
+=== Add the API Module
+Add https://bintray.com/bintray/jcenter[JCenter] as a repository to your Maven POM:
+[source,xml]
+----
+<repositories>
+    <repository>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>jcenter</id>
+        <name>JCenter</name>
+        <url>https://jcenter.bintray.com</url>
+    </repository>
+</repositories>
+----
+
+Add the following dependency:
+[source,xml]
+----
+<dependency>
+include::pom.xml[tag=api-coordinates]
+</dependency>
+----
+
+=== Add the Implementation Module
+[source,xml]
+----
+<dependency>
+include::pom.xml[tag=maven-coordinates]
+</dependency>
+----
+
+== Usage
+
+The corresponding https://github.com/dmeiners88/mapping-api#usage[section] of the API module
+applies. See also the https://commons.apache.org/proper/commons-jexl/reference/index.html[reference]
+of the Apache Commons JEXL scripting language.
