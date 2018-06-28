@@ -4,7 +4,7 @@
 [.float-group]
 --
 [.left]
-image::https://travis-ci.com/dmeiners88/mapping-impl-jexl.svg?branch=develop["Build Status", link="https://travis-ci.com/dmeiners88/mapping-api"]
+image:https://travis-ci.com/dmeiners88/mapping-impl-jexl.svg?branch=develop["Build Status", link="https://travis-ci.com/dmeiners88/mapping-impl-jexl"]
 
 [.left]
 image::https://sonarcloud.io/api/project_badges/measure?project=de.dmeiners.mapping%3Amapping-impl-jexl&metric=alert_status[link="https://sonarcloud.io/api/project_badges/measure?project=de.dmeiners.mapping%3Amapping-impl-jexl&metric=alert_status"]
