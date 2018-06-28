@@ -13,7 +13,7 @@ image::https://sonarcloud.io/api/project_badges/measure?project=de.dmeiners.mapp
 image::https://api.bintray.com/packages/dmeiners/mapping/mapping-impl-jexl/images/download.svg?version=1.0.1[link="https://bintray.com/dmeiners/mapping/mapping-impl-jexl/1.0.1/link"]
 --
 
-This is the Apache Commons JEXL Implementation module for the Zero-Dependency Mapping Libarary.
+This is the Apache Commons JEXL Implementation module for the Zero-Dependency Mapping Library.
 
 toc::[]
 
