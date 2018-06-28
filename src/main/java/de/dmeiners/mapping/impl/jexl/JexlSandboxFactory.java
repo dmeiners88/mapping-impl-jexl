@@ -4,23 +4,26 @@ import org.apache.commons.jexl3.introspection.JexlSandbox;
 
 public class JexlSandboxFactory {
 
+    private static final String FOR_NAME_METHOD_NAME = "forName";
+    private static final String EXIT_METHOD_NAME = "exit";
+
     private JexlSandboxFactory() {
     }
 
     public static JexlSandbox create() {
 
         JexlSandbox sandbox = new JexlSandbox();
-        sandbox.black(System.class.getName()).execute("exit");
-        sandbox.black(Runtime.class.getName()).execute("exit");
-        sandbox.black(Class.class.getName()).execute("forName");
-        sandbox.black(Byte.class.getName()).execute("forName");
-        sandbox.black(Short.class.getName()).execute("forName");
-        sandbox.black(Integer.class.getName()).execute("forName");
-        sandbox.black(Long.class.getName()).execute("forName");
-        sandbox.black(Float.class.getName()).execute("forName");
-        sandbox.black(Double.class.getName()).execute("forName");
-        sandbox.black(Boolean.class.getName()).execute("forName");
-        sandbox.black(Character.class.getName()).execute("forName");
+        sandbox.black(System.class.getName()).execute(EXIT_METHOD_NAME);
+        sandbox.black(Runtime.class.getName()).execute(EXIT_METHOD_NAME);
+        sandbox.black(Class.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Byte.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Short.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Integer.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Long.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Float.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Double.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Boolean.class.getName()).execute(FOR_NAME_METHOD_NAME);
+        sandbox.black(Character.class.getName()).execute(FOR_NAME_METHOD_NAME);
 
         return sandbox;
     }
