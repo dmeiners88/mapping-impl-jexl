@@ -1,5 +1,7 @@
 package de.dmeiners.mapping.impl.jexl
 
+import de.dmeiners.mapping.api.Script
+import groovy.transform.CompileStatic
 import spock.lang.Specification
 
 class JexlPostProcessorSimpleScriptSpec extends Specification {
@@ -26,5 +28,16 @@ class JexlPostProcessorSimpleScriptSpec extends Specification {
         expect:
         def script = subject.compileInline(scriptText)
         script.execute(targets, [:]) == ["Hello World!", "Goodbye World!"]
+    }
+
+    def "script has reference to original script text"() {
+
+        given:
+        def scriptText = "target += ' World!'"
+        def subject = new JexlPostProcessor()
+
+        expect:
+        def script = subject.compileInline(scriptText)
+        script.scriptText == scriptText
     }
 }

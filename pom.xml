@@ -5,7 +5,7 @@
     <!-- tag::maven-coordinates[] -->
     <groupId>de.dmeiners.mapping</groupId>
     <artifactId>mapping-impl-jexl</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <!-- end::maven-coordinates[] -->
     <name>Mapping Library - JEXL Implementation</name>
     <description>A Zero-Dependency Mapping Library - Apache Commons JEXL Implementation</description>
@@ -14,6 +14,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <shadedPrefix>de.dmeiners.mapping.impl.jexl.shaded</shadedPrefix>
+        <test.classpath.exclude>_</test.classpath.exclude>
     </properties>
     <repositories>
         <repository>
@@ -38,7 +39,7 @@
                 <!-- tag::api-coordinates[] -->
                 <groupId>de.dmeiners.mapping</groupId>
                 <artifactId>mapping-api</artifactId>
-                <version>1.0.0</version>
+                <version>2.0.0</version>
                 <!-- end::api-coordinates[] -->
                 <scope>provided</scope>
             </dependency>
@@ -145,6 +146,12 @@
                             <include>**/*Test.*</include>
                             <include>**/*Spec.*</include>
                         </includes>
+                        <classpathDependencyExcludes>
+                            <classpathDependencyExclude>${test.classpath.exclude}</classpathDependencyExclude>
+                        </classpathDependencyExcludes>
+                        <additionalClasspathElements>
+                            <additionalClasspathElement>${mapping-api-1.0.0}</additionalClasspathElement>
+                        </additionalClasspathElements>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -199,7 +206,27 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <version>3.1.1</version>
+                    <executions>
+                        <execution>
+                            <id>copy-mapping-api-1.0.0-dependency</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>copy</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>de.dmeiners.mapping</groupId>
+                                <artifactId>mapping-api</artifactId>
+                                <version>1.0.0</version>
+                                <type>jar</type>
+                                <outputDirectory>${project.build.directory}</outputDirectory>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>com.github.ekryd.sortpom</groupId>
@@ -224,11 +251,6 @@
                                 </excludes>
                             </filter>
                         </filters>
-                        <artifactSet>
-                            <excludes>
-                                <exclude>de.dmeiners.mapping:mapping-api</exclude>
-                            </excludes>
-                        </artifactSet>
                         <relocations>
                             <relocation>
                                 <pattern>org.apache.commons.jexl3</pattern>
@@ -417,4 +439,18 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>test-api-1.0.0-compatibility</id>
+            <activation>
+                <property>
+                    <name>api-1</name>
+                </property>
+            </activation>
+            <properties>
+                <test.classpath.exclude>de.dmeiners.mapping:mapping-api</test.classpath.exclude>
+                <mapping-api-1.0.0>${project.build.directory}/mapping-api-1.0.0.jar</mapping-api-1.0.0>
+            </properties>
+        </profile>
+    </profiles>
 </project>

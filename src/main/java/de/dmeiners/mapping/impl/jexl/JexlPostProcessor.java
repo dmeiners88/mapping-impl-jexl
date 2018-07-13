@@ -51,7 +51,7 @@ public class JexlPostProcessor extends BasePostProcessor {
 
         JexlScript script = this.scriptCache.computeIfAbsent(scriptText, this::parse);
 
-        return new de.dmeiners.mapping.impl.jexl.JexlScript(script, this.extensions);
+        return new de.dmeiners.mapping.impl.jexl.JexlScript(script, this.extensions, scriptText);
     }
 
     private JexlScript parse(String scriptText) {
