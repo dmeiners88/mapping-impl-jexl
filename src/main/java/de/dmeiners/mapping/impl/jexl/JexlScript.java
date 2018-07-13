@@ -16,10 +16,12 @@ public class JexlScript extends BaseScript {
 
     private final org.apache.commons.jexl3.JexlScript script;
     private final Map<String, Object> extensions;
+    private final String scriptText;
 
-    JexlScript(org.apache.commons.jexl3.JexlScript script, Map<String, Object> extensions) {
+    JexlScript(org.apache.commons.jexl3.JexlScript script, Map<String, Object> extensions, String scriptText) {
         this.script = script;
         this.extensions = extensions;
+        this.scriptText = scriptText;
     }
 
     @Override
@@ -32,6 +34,11 @@ public class JexlScript extends BaseScript {
             .map(target -> executeScript(target, extendedContext))
             .map(result -> castResult(targets.iterator().next(), result))
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getScriptText() {
+        return this.scriptText;
     }
 
     private <T> Object executeScript(T target, Map<String, Object> context) {

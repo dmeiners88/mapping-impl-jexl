@@ -29,7 +29,7 @@
         "classSimpleName": "JexlSandboxFactory",
         "methodName": "create",
         "oldArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.1",
-        "newArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.2-SNAPSHOT",
+        "newArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.2.0-SNAPSHOT",
         "elementKind": "method",
         "justification": "Class is an implementation detail and was part of the public API by accident."
       },
@@ -43,7 +43,7 @@
         "classQualifiedName": "de.dmeiners.mapping.impl.jexl.JexlSandboxFactory",
         "classSimpleName": "JexlSandboxFactory",
         "oldArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.1",
-        "newArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.2-SNAPSHOT",
+        "newArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.2.0-SNAPSHOT",
         "elementKind": "class",
         "justification": "Class is an implementation detail and was part of the public API by accident."
       }
