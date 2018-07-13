@@ -1,0 +1,52 @@
+[
+  {
+    "extension": "revapi.semver.ignore",
+    "configuration": {
+      "enabled": true
+    }
+  },
+  {
+    "extension": "revapi.filter",
+    "configuration": {
+      "elements": {
+        "exclude": [
+          "class de\\.dmeiners\\.mapping\\.impl\\.jexl\\.shaded\\..*"
+        ]
+      }
+    }
+  },
+  {
+    "extension": "revapi.ignore",
+    "configuration": [
+      {
+        "code": "java.method.visibilityReduced",
+        "old": "method de.dmeiners.mapping.impl.jexl.shaded.org.apache.commons.jexl3.introspection.JexlSandbox de.dmeiners.mapping.impl.jexl.JexlSandboxFactory::create()",
+        "new": "method de.dmeiners.mapping.impl.jexl.shaded.org.apache.commons.jexl3.introspection.JexlSandbox de.dmeiners.mapping.impl.jexl.JexlSandboxFactory::create()",
+        "oldVisibility": "public",
+        "newVisibility": "package",
+        "package": "de.dmeiners.mapping.impl.jexl",
+        "classQualifiedName": "de.dmeiners.mapping.impl.jexl.JexlSandboxFactory",
+        "classSimpleName": "JexlSandboxFactory",
+        "methodName": "create",
+        "oldArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.1",
+        "newArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.2-SNAPSHOT",
+        "elementKind": "method",
+        "justification": "Class is an implementation detail and was part of the public API by accident."
+      },
+      {
+        "code": "java.class.visibilityReduced",
+        "old": "class de.dmeiners.mapping.impl.jexl.JexlSandboxFactory",
+        "new": "class de.dmeiners.mapping.impl.jexl.JexlSandboxFactory",
+        "oldVisibility": "public",
+        "newVisibility": "package",
+        "package": "de.dmeiners.mapping.impl.jexl",
+        "classQualifiedName": "de.dmeiners.mapping.impl.jexl.JexlSandboxFactory",
+        "classSimpleName": "JexlSandboxFactory",
+        "oldArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.1",
+        "newArchive": "de.dmeiners.mapping:mapping-impl-jexl:jar:1.0.2-SNAPSHOT",
+        "elementKind": "class",
+        "justification": "Class is an implementation detail and was part of the public API by accident."
+      }
+    ]
+  }
+]
