@@ -31,7 +31,6 @@ public class JexlPostProcessor extends BasePostProcessor {
             .silent(false)
             .sandbox(JexlSandboxFactory.create())
             .loader(new SandboxClassLoader())
-            .uberspect(new HelperUberspect())
             .create();
 
         logger.debug("Initialized.");
