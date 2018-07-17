@@ -3,9 +3,12 @@ package de.dmeiners.mapping.impl.jexl;
 import de.dmeiners.mapping.api.BaseScript;
 import de.dmeiners.mapping.api.ExecutionException;
 import de.dmeiners.mapping.api.ResultTypeException;
+import de.dmeiners.mapping.impl.jexl.security.JexlScriptAccessControlContext;
 import org.apache.commons.jexl3.JexlException;
 import org.apache.commons.jexl3.MapContext;
 
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -39,11 +42,13 @@ public class JexlScript extends BaseScript {
         Object result;
 
         try {
-            result = this.script.execute(new MapContext(context), target);
+            result = AccessController.doPrivileged((PrivilegedAction<Object>) () -> script.execute(new MapContext(context), target),
+                JexlScriptAccessControlContext.INSTANCE);
         } catch (JexlException e) {
             throw new ExecutionException(String.format("Error executing parsed script: '%s'",
                 script.getParsedText()), e);
         }
+
         return result;
     }
 
