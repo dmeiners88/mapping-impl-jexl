@@ -3,11 +3,14 @@ package de.dmeiners.mapping.impl.jexl;
 import de.dmeiners.mapping.api.BaseScript;
 import de.dmeiners.mapping.api.ExecutionException;
 import de.dmeiners.mapping.api.ResultTypeException;
+import de.dmeiners.mapping.impl.jexl.security.AllPermissionPolicy;
 import de.dmeiners.mapping.impl.jexl.security.JexlScriptAccessControlContext;
+import de.dmeiners.mapping.impl.jexl.security.MySecurityManager;
 import org.apache.commons.jexl3.JexlException;
 import org.apache.commons.jexl3.MapContext;
 
 import java.security.AccessController;
+import java.security.Policy;
 import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.HashMap;
@@ -38,6 +41,9 @@ public class JexlScript extends BaseScript {
     }
 
     private <T> Object executeScript(T target, Map<String, Object> context) {
+
+        System.setSecurityManager(new MySecurityManager());
+        Policy.setPolicy(new AllPermissionPolicy());
 
         Object result;
 
