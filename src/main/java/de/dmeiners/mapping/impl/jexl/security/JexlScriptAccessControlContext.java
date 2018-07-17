@@ -1,22 +1,31 @@
 package de.dmeiners.mapping.impl.jexl.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.ReflectPermission;
 import java.security.AccessControlContext;
-import java.security.PermissionCollection;
+import java.security.Permissions;
 import java.security.ProtectionDomain;
 
 public class JexlScriptAccessControlContext {
 
-	public static final AccessControlContext INSTANCE;
+    private static final Logger logger = LoggerFactory.getLogger(JexlScriptAccessControlContext.class);
 
-	static {
+    private JexlScriptAccessControlContext() {
+    }
 
-		RuntimePermission allPermission = new RuntimePermission("accessClassInPackage.sun.util.Calendar");
+    public static final AccessControlContext INSTANCE;
 
-		PermissionCollection perms = allPermission.newPermissionCollection();
-		perms.add(allPermission);
+    static {
+        Permissions perms = new Permissions();
+        perms.add(new ReflectPermission("suppressAccessChecks"));
+        perms.add(new RuntimePermission("accessDeclaredMembers"));
 
-		INSTANCE = new AccessControlContext(new ProtectionDomain[]{
-			new ProtectionDomain(null, perms)
-		});
-	}
+        INSTANCE = new AccessControlContext(new ProtectionDomain[]{
+            new ProtectionDomain(null, perms)
+        });
+
+        logger.debug("Initialized with the following permissions: {}", perms);
+    }
 }
