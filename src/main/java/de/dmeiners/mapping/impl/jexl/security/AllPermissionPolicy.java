@@ -1,17 +1,41 @@
 package de.dmeiners.mapping.impl.jexl.security;
 
-import java.security.AllPermission;
-import java.security.CodeSource;
-import java.security.PermissionCollection;
-import java.security.Policy;
+import java.security.*;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Vector;
 
 public class AllPermissionPolicy extends Policy {
 
-	private static final PermissionCollection permissions = new AllPermission().newPermissionCollection();
+    private static class AllPermissionsSingleton extends PermissionCollection {
 
-	@Override
-	public PermissionCollection getPermissions(CodeSource codesource) {
+        private static final Vector<Permission> ALL_PERMISSIONS = new Vector<>(Collections.singletonList(new AllPermission()));
 
-		return permissions;
-	}
+        @Override
+        public void add(Permission permission) {
+
+        }
+
+        @Override
+        public boolean implies(Permission permission) {
+            return true;
+        }
+
+        @Override
+        public Enumeration<Permission> elements() {
+            return ALL_PERMISSIONS.elements();
+        }
+
+        @Override
+        public boolean isReadOnly() {
+            return false;
+        }
+    }
+
+    private static final AllPermissionsSingleton ALL_PERMISSIONS_SINGLETON = new AllPermissionsSingleton();
+
+    @Override
+    public PermissionCollection getPermissions(CodeSource codesource) {
+        return ALL_PERMISSIONS_SINGLETON;
+    }
 }
