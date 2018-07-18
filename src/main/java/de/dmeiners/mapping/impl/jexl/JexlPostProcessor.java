@@ -1,6 +1,11 @@
 package de.dmeiners.mapping.impl.jexl;
 
-import de.dmeiners.mapping.api.*;
+import de.dmeiners.mapping.api.BasePostProcessor;
+import de.dmeiners.mapping.api.ClasspathScriptNameResolver;
+import de.dmeiners.mapping.api.ParseException;
+import de.dmeiners.mapping.api.Script;
+import de.dmeiners.mapping.api.ScriptNameResolver;
+import de.dmeiners.mapping.impl.jexl.security.AllPermissionPolicy;
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlException;
@@ -8,6 +13,7 @@ import org.apache.commons.jexl3.JexlScript;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.Policy;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +27,12 @@ public class JexlPostProcessor extends BasePostProcessor {
 
     private final JexlEngine engine;
 
+    static {
+
+        Policy.setPolicy(new AllPermissionPolicy());
+        System.setSecurityManager(new SecurityManager());
+    }
+
     JexlPostProcessor(ScriptNameResolver scriptNameResolver, Map<String, Object> extensions) {
 
         super(scriptNameResolver, extensions);
@@ -31,7 +43,6 @@ public class JexlPostProcessor extends BasePostProcessor {
             .silent(false)
             .sandbox(JexlSandboxFactory.create())
             .loader(new SandboxClassLoader())
-            .uberspect(new HelperUberspect())
             .create();
 
         logger.debug("Initialized.");
